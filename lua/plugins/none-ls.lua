@@ -11,13 +11,13 @@ return {
         sources = {
           -- formattings
           null_ls.builtins.formatting.stylua,
-          null_ls.builtins.formatting.prettier,
+          -- null_ls.builtins.formatting.prettier,
 
           -- diagnostics
           -- null_ls.builtins.diagnostics.eslint_d
-          require("none-ls.diagnostics.eslint_d").with({
-            only_local = "node_modules/.bin"
-          }),
+          -- require("none-ls.diagnostics.eslint_d").with({
+          --   only_local = "node_modules/.bin"
+          -- }),
         },
       })
 

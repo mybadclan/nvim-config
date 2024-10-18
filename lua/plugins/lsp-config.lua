@@ -21,11 +21,12 @@ return {
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
+        root_dir = lspconfig.util.root_pattern("package-lock.json", "yarn.lock", "bun.lockb"),
+        single_file_support = false
 			})
 			lspconfig.tailwindcss.setup({})
-
       lspconfig.eslint.setup({
         capabilities = capabilities,
         autoFixOnSave = true
@@ -33,11 +34,22 @@ return {
       lspconfig.biome.setup({
         capabilities = capabilities
       })
+      lspconfig.elixirls.setup({
+        cmd = { "elixir-ls" },
+        capabilities = capabilities,
+      })
+      lspconfig.denols.setup({
+        capabilities = capabilities,
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc")
+      })
+
+      local telescope = require("telescope.builtin")
 
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, {})
-			vim.keymap.set("n", "<leader>lr", vim.lsp.buf.references, {})
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+      vim.keymap.set("n", "<leader>ld", telescope.lsp_definitions, {})
+      vim.keymap.set("n", "<leader>lt", telescope.lsp_type_definitions, {})
+      vim.keymap.set("n", "<leader>lr", telescope.lsp_references, {})
+      vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 		end,
 	},
 	{
